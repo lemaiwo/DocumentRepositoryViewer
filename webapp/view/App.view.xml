@@ -1,0 +1,34 @@
+<mvc:View controllerName="be.wl.DocumentRepositoryViewer.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.f" xmlns:u="sap.ui.unified">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<headerContent>
+						<u:FileUploader buttonOnly="true" icon="sap-icon://upload" iconOnly="true" sameFilenameAllowed="true" change=".onUploadImage"/>
+					</headerContent>
+					<content>
+						<l:Grid containerQuery="true" content="{repo>/files}">
+							<Panel height="400px">
+								<layoutData>
+									<l:GridData span="XL2 L3 M6 S12"/>
+								</layoutData>
+								<headerToolbar>
+									<Toolbar>
+										<Title text="{repo>name}"/>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://delete" press=".onDeleteImage"/>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<Link visible="{= !${repo>isImage} }" text="Open file" target="_blank" href="/cmisproxysap/cmis/json/0d1793f590788bc65bc9b3c5/root/{repo>name}"/>
+									<Image visible="{repo>isImage}" src="/cmisproxysap/cmis/json/0d1793f590788bc65bc9b3c5/root/{repo>name}" width="100%"/>
+								</content>
+							</Panel>
+						</l:Grid>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
