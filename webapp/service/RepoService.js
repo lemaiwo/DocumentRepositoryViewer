@@ -1,9 +1,9 @@
 sap.ui.define([
-	"./Service"
-], function (Service) {
+	"./HTTPService"
+], function (HTTPService) {
 	"use strict";
 
-	var RepoService = Service.extend("be.wl.DocumentRepositoryViewer.service.RepoService", {
+	var RepoService = HTTPService.extend("be.wl.DocumentRepositoryViewer.service.RepoService", {
 		constructor: function () {},
 		uploadFile: function (file) {
 			var form = new FormData();

@@ -3,60 +3,8 @@ sap.ui.define([
 ], function (Object) {
 	"use strict";
 
-	var Service = Object.extend("be.wl.DocumentRepositoryViewer.service.Service", {
+	var Service = Object.extend("be.wl.DocumentRepositoryViewer.service.HTTPService", {
 		constructor: function () {},
-
-		setModel: function (model) {
-			this.model = model;
-		},
-		odata: function (url) {
-			var me = this;
-			var core = {
-				ajax: function (type, url, data, parameters) {
-					var promise = new Promise(function (resolve, reject) {
-						var args = [];
-						var params = {};
-						args.push(url);
-						if (data) {
-							args.push(data);
-						}
-						if (parameters) {
-							params = parameters;
-						}
-						params.success = function (result, response) {
-							resolve({
-								data: result,
-								response: response
-							});
-						};
-						params.error = function (error) {
-							reject(error);
-						};
-						args.push(params);
-						me.model[type].apply(me.model, args);
-					});
-					return promise;
-				}
-			};
-
-			return {
-				'get': function (params) {
-					return core.ajax('read', url, false, params);
-				},
-				'post': function (data, params) {
-					return core.ajax('create', url, data, params);
-				},
-				'put': function (data, params) {
-					return core.ajax('update', url, data, params);
-				},
-				'delete': function (params) {
-					return core.ajax('remove', url, false, params);
-				},
-				'function': function (params) {
-					return core.ajax('callFunction', url, false, params);
-				}
-			};
-		},
 		http: function (url) {
 
 			// A small example of object
@@ -87,26 +35,7 @@ sap.ui.define([
 						client.open(method, uri, true);
 
 						if (args && (method === 'POST' || method === 'PUT')) {
-							// client.setRequestHeader("accept", "application/json");
 							var data = args;
-							// var data = {};
-							// for (var keyp in args) {
-							// 	if (args.hasOwnProperty(keyp)) {
-							// 		if (keyp === "files") {
-							// 			var form = new FormData();
-							// 			form.append(keyp, args[keyp].content, args[keyp].name);
-
-							// 			if (form.fd) {
-							// 				form = form.fd;
-							// 			}
-							// 		} else {
-							// 			data[keyp] = args[keyp];
-							// 		}
-							// 	}
-							// }
-							// if(!form){
-							// 	client.setRequestHeader("Content-Type", "application/json");
-							// }
 						}
 						for (var keyh in headers) {
 							if (headers.hasOwnProperty(keyh)) {

@@ -37,11 +37,11 @@
       },
       "description": "SAPUI5 Test Resources"
     },{
-      "path": "/cmisproxysap/cmis/json",
+      "path": "/cmisproxysap",
       "target": {
         "type": "destination",
         "name": "documentservicewl",
-        "entryPath": "/cmisproxysap/cmis/json"
+        "entryPath": "/cmisproxysap"
       },
       "description": "CMIS Connection Document Service"
     }
