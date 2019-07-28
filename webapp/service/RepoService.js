@@ -30,7 +30,6 @@ sap.ui.define([
 			return this.getRepoId().then(function (ReposId) {
 				return this.http("/cmisproxysap/cmis/json/" + ReposId + "/root/").get();
 			}.bind(this));
-			// return this.http("/cmisproxysap/cmis/json/0d1793f590788bc65bc9b3c5/root/").get();
 		},
 		getRepoId: function () {
 			if (this.RepoId) {
