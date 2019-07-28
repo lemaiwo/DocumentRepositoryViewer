@@ -7,14 +7,11 @@ sap.ui.define([
 
 	return Controller.extend("be.wl.DocumentRepositoryViewer.controller.App", {
 		onInit: function () {
-			console.log("init 1");
 			this.loadFiles();
-			console.log("init 2");
 		},
 		loadFiles: async function () {
-			console.log("load 1");
 			var result = await RepoService.getFiles();
-			var files = JSON.parse(result).objects.map(file => ({
+			var files = result.objects.map(file => ({
 				name: file.object.properties["cmis:name"].value,
 				id: file.object.properties["cmis:objectId"].value,
 				isImage: file.object.properties["cmis:contentStreamMimeType"].value.indexOf("image") > -1 ? true : false
@@ -22,10 +19,9 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel({
 				files: files
 			}), "repo");
-			console.log("load 2");
 			return files;
 			// return RepoService.getFiles().then((result) => {
-			// 	var files = JSON.parse(result).objects.map(file => ({
+			// 	var files = result.objects.map(file => ({
 			// 		name: file.object.properties["cmis:name"].value,
 			// 		id: file.object.properties["cmis:objectId"].value,
 			// 		isImage:file.object.properties["cmis:contentStreamMimeType"].value.indexOf("image") > -1 ? true:false
